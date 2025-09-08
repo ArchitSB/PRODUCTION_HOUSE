@@ -1,8 +1,14 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState } from 'react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 50);
+  });
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -12,48 +18,72 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const scrollToSection = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
+
   return (
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-cinematic-900/90 backdrop-blur-md border-b border-gold-500/20"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-dark-800/95 backdrop-blur-lg shadow-2xl border-b border-white/10' 
+          : 'bg-transparent'
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="container-custom">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <motion.div 
             className="flex-shrink-0"
             whileHover={{ scale: 1.05 }}
           >
-            <h1 className="text-2xl font-cinematic font-bold text-gold-500">
-              Shambhu Production
+            <h1 className="text-2xl lg:text-3xl font-display font-bold">
+              <span className="text-gold-400">Shambhu</span>
+              <span className="text-cream ml-2">Production</span>
             </h1>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <motion.a
+          <div className="hidden lg:block">
+            <div className="flex items-center space-x-12">
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.name}
-                  href={item.href}
-                  className="text-white hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors duration-300"
-                  whileHover={{ scale: 1.1 }}
+                  onClick={() => scrollToSection(item.href)}
+                  className="text-cream hover:text-gold-400 text-lg font-medium transition-colors duration-300 relative group"
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
                   {item.name}
-                </motion.a>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 transition-all duration-300 group-hover:w-full"></span>
+                </motion.button>
               ))}
+              <motion.button
+                className="btn-primary ml-8"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Start Project
+              </motion.button>
             </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-gold-400 focus:outline-none"
+              className="text-cream hover:text-gold-400 focus:outline-none p-2"
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -70,19 +100,21 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden"
+            className="lg:hidden glass-effect rounded-xl mt-4 overflow-hidden"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-cinematic-800 rounded-lg mt-2">
+            <div className="px-6 py-6 space-y-4">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="text-white hover:text-gold-400 block px-3 py-2 text-base font-medium transition-colors duration-300"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => scrollToSection(item.href)}
+                  className="block text-cream hover:text-gold-400 text-lg font-medium transition-colors duration-300 w-full text-left py-2"
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
+              <button className="btn-primary w-full mt-6">
+                Start Project
+              </button>
             </div>
           </motion.div>
         )}

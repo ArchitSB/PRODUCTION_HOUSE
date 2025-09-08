@@ -1,126 +1,186 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
-const ServiceCard = ({ title, services, icon, index }) => {
+const ServiceCard = ({ title, services, icon, index, isTimeline }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
-      viewport={{ once: true }}
-      className="relative bg-cinematic-800 p-8 rounded-lg border border-gold-500/20 hover:border-gold-500/50 transition-all duration-300 group overflow-hidden"
+      transition={{ duration: 0.8, delay: index * 0.2 }}
+      viewport={{ once: true, margin: "-50px" }}
+      className={`relative glass-effect p-10 rounded-3xl hover:bg-white/10 transition-all duration-500 group overflow-hidden ${
+        isTimeline ? 'lg:mb-8' : ''
+      }`}
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gold-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      {/* Timeline connector */}
+      {isTimeline && index < 3 && (
+        <div className="hidden lg:block absolute -right-16 top-1/2 w-16 h-0.5 bg-gradient-to-r from-gold-400 to-transparent z-10"></div>
+      )}
+
+      {/* Background gradient on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gold-400/5 via-transparent to-gold-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       
       <div className="relative z-10">
         {/* Step number */}
-        <div className="absolute -top-4 -right-4 w-12 h-12 bg-gold-500 text-cinematic-900 rounded-full flex items-center justify-center font-bold text-lg">
+        <div className="absolute -top-6 -right-6 w-16 h-16 bg-gradient-to-br from-gold-400 to-gold-600 text-dark-900 rounded-2xl flex items-center justify-center font-bold text-xl shadow-xl">
           {index + 1}
         </div>
         
-        <div className="text-gold-500 text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
+        <motion.div 
+          className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500"
+          whileHover={{ rotate: 5 }}
+        >
           {icon}
-        </div>
+        </motion.div>
         
-        <h3 className="text-2xl font-cinematic font-bold text-white mb-6 group-hover:text-gold-400 transition-colors duration-300">
+        <h3 className="text-3xl font-display font-bold text-cream mb-6 group-hover:text-gold-400 transition-colors duration-500">
           {title}
         </h3>
         
-        <ul className="space-y-3">
+        <div className="space-y-4">
           {services.map((service, serviceIndex) => (
-            <motion.li 
+            <motion.div 
               key={serviceIndex}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: (index * 0.2) + (serviceIndex * 0.1) }}
               viewport={{ once: true }}
-              className="flex items-start gap-3 text-gray-300"
+              className="flex items-start gap-4 text-gray-300 group-hover:text-gray-200 transition-colors duration-300"
             >
-              <div className="w-2 h-2 bg-gold-500 rounded-full mt-2 flex-shrink-0"></div>
-              <span className="group-hover:text-white transition-colors duration-300">{service}</span>
-            </motion.li>
+              <div className="w-2 h-2 bg-gold-400 rounded-full mt-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
+              <span className="text-lg leading-relaxed">{service}</span>
+            </motion.div>
           ))}
-        </ul>
+        </div>
+
+        {/* Learn more button */}
+        <motion.button
+          className="mt-8 text-gold-400 hover:text-gold-300 font-semibold flex items-center gap-2 group/btn"
+          whileHover={{ x: 5 }}
+        >
+          Learn More 
+          <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </motion.button>
       </div>
     </motion.div>
   );
 };
 
 const Services = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const serviceCategories = [
     {
       title: "Pre-Production",
       icon: "📝",
       services: [
-        "Script Development & Analysis",
-        "Storyboarding & Visualization",
-        "Casting & Talent Management",
-        "Location Scouting",
-        "Production Planning",
-        "Budget Management"
+        "Script Development & Story Analysis",
+        "Creative Storyboarding & Visualization",
+        "Professional Casting & Talent Management",
+        "Strategic Location Scouting",
+        "Comprehensive Production Planning",
+        "Budget Management & Financial Planning"
       ]
     },
     {
       title: "Production",
       icon: "🎥",
       services: [
-        "Cinematography & Filming",
-        "Audio Recording",
-        "Lighting Design",
+        "Expert Cinematography & Filming",
+        "Professional Audio Recording",
+        "Creative Lighting Design",
         "Set Design & Construction",
-        "Equipment Rental",
-        "Crew Management"
+        "Equipment Rental & Management",
+        "Experienced Crew Coordination"
       ]
     },
     {
       title: "Post-Production",
       icon: "🎞️",
       services: [
-        "Video Editing & Assembly",
-        "Color Grading & Correction",
-        "Visual Effects (VFX)",
-        "Sound Design & Mixing",
-        "Motion Graphics",
-        "Final Delivery & Mastering"
+        "Professional Video Editing & Assembly",
+        "Advanced Color Grading & Correction",
+        "Stunning Visual Effects (VFX)",
+        "Immersive Sound Design & Mixing",
+        "Dynamic Motion Graphics",
+        "Final Delivery & Quality Mastering"
       ]
     },
     {
       title: "Distribution & Marketing",
       icon: "📢",
       services: [
-        "Content Strategy",
-        "Social Media Marketing",
-        "Theatrical Distribution",
-        "Digital Platform Release",
-        "Promotional Content",
-        "Audience Engagement"
+        "Strategic Content Marketing",
+        "Social Media Campaign Management",
+        "Theatrical Distribution Planning",
+        "Digital Platform Optimization",
+        "Creative Promotional Content",
+        "Audience Engagement Strategies"
       ]
     }
   ];
 
   return (
-    <section id="services" className="py-20 bg-cinematic-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="section-padding bg-dark-800 relative overflow-hidden" ref={ref}>
+      {/* Background decorative elements */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold-400/3 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-gold-400/5 rounded-full blur-3xl"></div>
+
+      <div className="container-custom">
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-cinematic font-bold text-white mb-6">
-            Our <span className="text-gold-500">Services</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <motion.h2 
+            className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <span className="text-cream">Our</span>{" "}
+            <span className="text-gold-400">Services</span>
+          </motion.h2>
+          
+          <motion.p 
+            className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             From concept to screen, we provide comprehensive production services 
-            that bring your vision to life with professional excellence.
-          </p>
+            that bring your vision to life with professional excellence and creative innovation.
+          </motion.p>
         </motion.div>
 
-        {/* Timeline indicator */}
-        <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-gold-500 to-transparent opacity-30"></div>
+        {/* Timeline Layout for Desktop */}
+        <div className="hidden lg:block relative">
+          {/* Central timeline line */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-gold-400 via-gold-400/50 to-transparent"></div>
+          
+          <div className="space-y-32">
+            {serviceCategories.map((category, index) => (
+              <div key={category.title} className={`flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
+                <div className={`w-5/12 ${index % 2 === 0 ? 'pr-16' : 'pl-16'}`}>
+                  <ServiceCard 
+                    title={category.title}
+                    services={category.services}
+                    icon={category.icon}
+                    index={index}
+                    isTimeline={false}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Grid Layout for Mobile/Tablet */}
+        <div className="lg:hidden grid gap-8">
           {serviceCategories.map((category, index) => (
             <ServiceCard 
               key={category.title}
@@ -128,28 +188,35 @@ const Services = () => {
               services={category.services}
               icon={category.icon}
               index={index}
+              isTimeline={false}
             />
           ))}
         </div>
 
         {/* Call to Action */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="text-center mt-24"
         >
-          <p className="text-lg text-gray-300 mb-6">
-            Ready to bring your vision to life?
-          </p>
-          <motion.button 
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(245, 158, 11, 0.5)" }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gold-500 text-cinematic-900 font-semibold rounded-lg hover:bg-gold-400 transition-all duration-300"
-          >
-            Start Your Project
-          </motion.button>
+          <div className="glass-effect p-12 rounded-3xl max-w-3xl mx-auto">
+            <h3 className="text-3xl font-display font-bold text-cream mb-6">
+              Ready to Bring Your Vision to Life?
+            </h3>
+            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+              Let's collaborate to create something extraordinary. Our team is ready to 
+              transform your ideas into compelling visual stories.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="btn-primary text-lg px-10 py-4">
+                Start Your Project
+              </button>
+              <button className="btn-secondary text-lg px-10 py-4">
+                View Our Process
+              </button>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
