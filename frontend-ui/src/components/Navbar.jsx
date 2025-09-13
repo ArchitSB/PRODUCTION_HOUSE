@@ -37,26 +37,27 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <motion.div 
             className="flex-shrink-0"
             whileHover={{ scale: 1.05 }}
           >
-            <h1 className="text-2xl lg:text-3xl font-display font-bold">
-              <span className="text-gold-400">Shambhu</span>
-              <span className="text-cream ml-2">Production</span>
-            </h1>
+            <img 
+              src="/Shambhu Logo-01.png" 
+              alt="Shambhu Group" 
+              className="h-8 md:h-12 w-auto"
+            />
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
-            <div className="flex items-center space-x-12">
+            <div className="flex items-center space-x-8 xl:space-x-12">
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-cream hover:text-gold-400 text-lg font-medium transition-colors duration-300 relative group"
+                  className="text-cream hover:text-gold-400 text-base xl:text-lg font-medium transition-colors duration-300 relative group"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: -20 }}
@@ -68,7 +69,7 @@ const Navbar = () => {
                 </motion.button>
               ))}
               <motion.button
-                className="btn-primary ml-8"
+                className="btn-primary ml-6 xl:ml-8 px-4 xl:px-6 py-2 xl:py-3 text-sm xl:text-base"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -81,43 +82,74 @@ const Navbar = () => {
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-cream hover:text-gold-400 focus:outline-none p-2"
+              className="text-cream hover:text-gold-400 focus:outline-none p-2 relative z-50"
             >
-              <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {isOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              <motion.div
+                animate={isOpen ? "open" : "closed"}
+                className="flex flex-col w-6 h-6 justify-center items-center"
+              >
+                <motion.span
+                  variants={{
+                    closed: { rotate: 0, y: 0 },
+                    open: { rotate: 45, y: 6 }
+                  }}
+                  className="w-6 h-0.5 bg-current block transform transition-all duration-300"
+                />
+                <motion.span
+                  variants={{
+                    closed: { opacity: 1 },
+                    open: { opacity: 0 }
+                  }}
+                  className="w-6 h-0.5 bg-current block mt-1.5 transform transition-all duration-300"
+                />
+                <motion.span
+                  variants={{
+                    closed: { rotate: 0, y: 0 },
+                    open: { rotate: -45, y: -6 }
+                  }}
+                  className="w-6 h-0.5 bg-current block mt-1.5 transform transition-all duration-300"
+                />
+              </motion.div>
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass-effect rounded-xl mt-4 overflow-hidden"
-          >
+        <motion.div 
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ 
+            opacity: isOpen ? 1 : 0, 
+            height: isOpen ? 'auto' : 0 
+          }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className={`lg:hidden overflow-hidden ${isOpen ? 'block' : 'hidden'}`}
+        >
+          <div className="glass-effect rounded-xl mt-4 mx-4 overflow-hidden">
             <div className="px-6 py-6 space-y-4">
-              {navItems.map((item) => (
-                <button
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="block text-cream hover:text-gold-400 text-lg font-medium transition-colors duration-300 w-full text-left py-2"
+                  className="block text-cream hover:text-gold-400 text-lg font-medium transition-colors duration-300 w-full text-left py-3 border-b border-white/10 last:border-b-0"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
                   {item.name}
-                </button>
+                </motion.button>
               ))}
-              <button className="btn-primary w-full mt-6">
+              <motion.button 
+                className="btn-primary w-full mt-6 py-3 text-base"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
                 Start Project
-              </button>
+              </motion.button>
             </div>
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
       </div>
     </motion.nav>
   );

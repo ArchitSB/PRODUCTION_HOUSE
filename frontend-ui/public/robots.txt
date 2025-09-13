@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://shambhu-production-house.vercel.app/sitemap.xml
+Sitemap: https://shambhu-group.vercel.app/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1

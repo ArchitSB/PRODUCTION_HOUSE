@@ -27,17 +27,17 @@ const ServiceCard = ({ title, services, icon, index, isTimeline }) => {
         </div>
         
         <motion.div 
-          className="text-7xl mb-8 group-hover:scale-110 transition-transform duration-500"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-500"
           whileHover={{ rotate: 5 }}
         >
           {icon}
         </motion.div>
         
-        <h3 className="text-3xl font-display font-bold text-cream mb-6 group-hover:text-gold-400 transition-colors duration-500">
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-cream mb-4 sm:mb-5 md:mb-6 group-hover:text-gold-400 transition-colors duration-500">
           {title}
         </h3>
         
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {services.map((service, serviceIndex) => (
             <motion.div 
               key={serviceIndex}
@@ -45,10 +45,10 @@ const ServiceCard = ({ title, services, icon, index, isTimeline }) => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: (index * 0.2) + (serviceIndex * 0.1) }}
               viewport={{ once: true }}
-              className="flex items-start gap-4 text-gray-300 group-hover:text-gray-200 transition-colors duration-300"
+              className="flex items-start gap-3 sm:gap-4 text-gray-300 group-hover:text-gray-200 transition-colors duration-300"
             >
-              <div className="w-2 h-2 bg-gold-400 rounded-full mt-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
-              <span className="text-lg leading-relaxed">{service}</span>
+              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-gold-400 rounded-full mt-2 sm:mt-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
+              <span className="text-sm sm:text-base md:text-lg leading-relaxed">{service}</span>
             </motion.div>
           ))}
         </div>
@@ -124,20 +124,20 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="section-padding bg-dark-800 relative overflow-hidden" ref={ref}>
+    <section id="services" className="py-16 md:py-24 lg:py-32 bg-dark-800 relative overflow-hidden" ref={ref}>
       {/* Background decorative elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold-400/3 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-gold-400/5 rounded-full blur-3xl"></div>
 
-      <div className="container-custom">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <motion.h2 
-            className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-8"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight mb-6 md:mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -147,7 +147,7 @@ const Services = () => {
           </motion.h2>
           
           <motion.p 
-            className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -162,10 +162,10 @@ const Services = () => {
           {/* Central timeline line */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-gold-400 via-gold-400/50 to-transparent"></div>
           
-          <div className="space-y-32">
+          <div className="space-y-24 lg:space-y-32">
             {serviceCategories.map((category, index) => (
               <div key={category.title} className={`flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                <div className={`w-5/12 ${index % 2 === 0 ? 'pr-16' : 'pl-16'}`}>
+                <div className={`w-5/12 ${index % 2 === 0 ? 'pr-12 lg:pr-16' : 'pl-12 lg:pl-16'}`}>
                   <ServiceCard 
                     title={category.title}
                     services={category.services}
@@ -180,7 +180,7 @@ const Services = () => {
         </div>
 
         {/* Grid Layout for Mobile/Tablet */}
-        <div className="lg:hidden grid gap-8">
+        <div className="lg:hidden grid gap-6 md:gap-8">
           {serviceCategories.map((category, index) => (
             <ServiceCard 
               key={category.title}
@@ -198,21 +198,21 @@ const Services = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 1 }}
-          className="text-center mt-24"
+          className="text-center mt-16 md:mt-20 lg:mt-24"
         >
-          <div className="glass-effect p-12 rounded-3xl max-w-3xl mx-auto">
-            <h3 className="text-3xl font-display font-bold text-cream mb-6">
+          <div className="glass-effect p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-3xl max-w-3xl mx-auto">
+            <h3 className="text-2xl sm:text-3xl font-display font-bold text-cream mb-4 md:mb-6">
               Ready to Bring Your Vision to Life?
             </h3>
-            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-300 mb-6 md:mb-8 leading-relaxed">
               Let's collaborate to create something extraordinary. Our team is ready to 
               transform your ideas into compelling visual stories.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary text-lg px-10 py-4">
+              <button className="btn-primary text-base sm:text-lg px-8 sm:px-10 py-3 sm:py-4">
                 Start Your Project
               </button>
-              <button className="btn-secondary text-lg px-10 py-4">
+              <button className="btn-secondary text-base sm:text-lg px-8 sm:px-10 py-3 sm:py-4">
                 View Our Process
               </button>
             </div>

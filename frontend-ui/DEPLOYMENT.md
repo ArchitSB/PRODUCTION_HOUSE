@@ -113,4 +113,4 @@ Use Vercel Analytics to monitor:
 
 ---
 
-🎬 **Your cinematic production house website is now live!**
+🎬 **Your cinematic creative group website is now live!**

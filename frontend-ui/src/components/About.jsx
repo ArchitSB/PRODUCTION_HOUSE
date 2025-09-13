@@ -13,119 +13,131 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="section-padding bg-dark-800 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-1/3 h-full opacity-5">
-        <div className="w-full h-full bg-gradient-to-l from-gold-400 to-transparent"></div>
+    <section id="about" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-gold-400 rounded-full filter blur-[120px] opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold-500 rounded-full filter blur-[150px] opacity-10 animate-pulse delay-1000"></div>
       </div>
 
-      <div className="container-custom" ref={ref}>
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image/Video Section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12 md:mb-16 lg:mb-20"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-cream mb-4 md:mb-6">
+            About <span className="text-gold-400">Shambhu Group</span>
+          </h2>
+          <div className="w-20 md:w-32 h-1 bg-gradient-to-r from-gold-400 to-gold-600 mx-auto mb-6 md:mb-8"></div>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            Crafting cinematic excellence through innovative storytelling and cutting-edge production.
+          </p>
+        </motion.div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16 md:mb-20">
+          {/* Left Content */}
           <motion.div 
-            initial={{ opacity: 0, x: -100 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="relative order-2 lg:order-1"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6 md:space-y-8"
           >
-            <div className="relative overflow-hidden rounded-2xl group">
-              <img 
-                src="https://images.unsplash.com/photo-1489598843152-c2d4b6500392?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                alt="Film Production Behind the Scenes" 
-                className="w-full h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-dark-900/60 via-transparent to-gold-400/20"></div>
-              
-              {/* Play button overlay */}
-              <motion.div 
-                className="absolute inset-0 flex items-center justify-center"
-                whileHover={{ scale: 1.1 }}
-              >
-                <div className="w-20 h-20 bg-gold-400/90 rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer group-hover:bg-gold-400 transition-colors">
-                  <svg className="w-8 h-8 text-dark-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </div>
-              </motion.div>
-            </div>
-            
-            {/* Floating stats card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="absolute -bottom-8 -right-8 glass-effect p-8 rounded-2xl"
-            >
-              <h4 className="text-gold-400 font-bold text-lg mb-2">Since 2014</h4>
-              <p className="text-cream text-sm leading-relaxed">
-                Creating award-winning content that resonates globally
+            <div className="prose prose-lg max-w-none">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-6 md:mb-8">
+                Established as a beacon of creative excellence, <strong className="text-gold-400 font-semibold">Shambhu Group</strong> has redefined the landscape of visual storytelling. Our journey began with a simple yet powerful vision: to transform stories into unforgettable cinematic experiences.
               </p>
+              
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-6 md:mb-8">
+                From intimate documentaries to grand theatrical productions, we bring together world-class talent, state-of-the-art technology, and an unwavering commitment to artistic integrity. Every project we undertake is a testament to our dedication to pushing creative boundaries.
+              </p>
+
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed">
+                Our multidisciplinary approach encompasses film production, television content creation, digital media innovation, and creative consulting. We don't just make content—we craft experiences that resonate, inspire, and endure.
+              </p>
+            </div>
+
+            {/* Key Metrics */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12"
+            >
+              <div className="text-center p-4 md:p-6 bg-dark-800/50 rounded-xl backdrop-blur-sm border border-gold-400/20 hover:border-gold-400/40 transition-all duration-300">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold-400 mb-2">50+</div>
+                <div className="text-xs sm:text-sm md:text-base text-gray-300">Projects Delivered</div>
+              </div>
+              <div className="text-center p-4 md:p-6 bg-dark-800/50 rounded-xl backdrop-blur-sm border border-gold-400/20 hover:border-gold-400/40 transition-all duration-300">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold-400 mb-2">10+</div>
+                <div className="text-xs sm:text-sm md:text-base text-gray-300">Years Experience</div>
+              </div>
+              <div className="text-center p-4 md:p-6 bg-dark-800/50 rounded-xl backdrop-blur-sm border border-gold-400/20 hover:border-gold-400/40 transition-all duration-300 col-span-2 md:col-span-1">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold-400 mb-2">25+</div>
+                <div className="text-xs sm:text-sm md:text-base text-gray-300">Awards Won</div>
+              </div>
             </motion.div>
           </motion.div>
 
-          {/* Text Content */}
+          {/* Right Content - Image/Visual */}
           <motion.div 
-            initial={{ opacity: 0, x: 100 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="order-1 lg:order-2"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="relative order-first lg:order-last"
           >
-            <motion.h2 
-              className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <span className="text-cream">Crafting Stories</span><br />
-              <span className="text-gold-400">That Inspire</span>
-            </motion.h2>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="space-y-6 mb-12"
-            >
-              <p className="text-xl text-gray-300 leading-relaxed">
-                At Shambhu Production House, we believe that every frame tells a story. 
-                We translate stories into visually compelling content that transcends boundaries 
-                and connects with audiences on an emotional level.
-              </p>
-              <p className="text-lg text-gray-400 leading-relaxed">
-                From conceptualization to final delivery, we bring together creative 
-                excellence and technical innovation to produce content that not only 
-                entertains but also transforms perspectives and touches hearts.
-              </p>
-            </motion.div>
-            
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-8">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: stat.delay }}
-                  className="text-center lg:text-left"
+            <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden bg-gradient-to-br from-gold-400/20 to-dark-800/20 backdrop-blur-sm border border-gold-400/30">
+              {/* Placeholder for company image/video */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div 
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, 0]
+                  }}
+                  transition={{ 
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-gold-400/30"
                 >
-                  <h3 className="text-4xl lg:text-5xl font-bold text-gold-400 mb-2 font-display">
-                    {stat.number}
-                  </h3>
-                  <p className="text-gray-400 font-medium">{stat.label}</p>
+                  🎬
                 </motion.div>
-              ))}
+              </div>
+              
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent"></div>
+              
+              {/* Bottom text overlay */}
+              <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6 right-4 md:right-6">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-cream mb-2">
+                  Where Vision Meets Reality
+                </h3>
+                <p className="text-sm sm:text-base text-gray-300">
+                  State-of-the-art production facilities and creative studios
+                </p>
+              </div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="mt-12"
-            >
-              <button className="btn-primary">
-                Discover Our Process
-              </button>
-            </motion.div>
+            {/* Floating elements */}
+            <motion.div 
+              animate={{ y: [-10, 10, -10] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-4 -right-4 w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-gold-400/20 rounded-full backdrop-blur-sm border border-gold-400/30"
+            ></motion.div>
+            
+            <motion.div 
+              animate={{ y: [10, -10, 10] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute -bottom-4 -left-4 w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 bg-gold-400/10 rounded-full backdrop-blur-sm border border-gold-400/20"
+            ></motion.div>
           </motion.div>
         </div>
       </div>

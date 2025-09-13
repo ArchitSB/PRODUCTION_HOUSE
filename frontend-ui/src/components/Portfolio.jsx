@@ -256,7 +256,7 @@ const Portfolio = () => {
   };
 
   return (
-    <section id="portfolio" className="section-padding bg-dark-900 relative overflow-hidden" ref={ref}>
+    <section id="portfolio" className="py-16 md:py-24 lg:py-32 bg-dark-900 relative overflow-hidden" ref={ref}>
       {/* Animated background */}
       <motion.div 
         style={{ y: backgroundY }}
@@ -273,7 +273,7 @@ const Portfolio = () => {
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
 
-      <div className="container-custom relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section header */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}

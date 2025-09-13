@@ -3,20 +3,26 @@ import { motion } from 'framer-motion';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const quickLinks = [
-    { name: 'About Us', href: '#about' },
-    { name: 'Our Services', href: '#services' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' }
-  ];
-
-  const services = [
-    'Film Production',
-    'Post-Production', 
-    'VFX & Animation',
-    'Commercial Work',
-    'Documentary Films'
-  ];
+  const footerLinks = {
+    company: [
+      { name: 'About Us', href: '#about' },
+      { name: 'Our Team', href: '#team' },
+      { name: 'Careers', href: '#careers' },
+      { name: 'Press', href: '#press' }
+    ],
+    services: [
+      { name: 'Film Production', href: '#services' },
+      { name: 'Post-Production', href: '#services' },
+      { name: 'VFX & Animation', href: '#services' },
+      { name: 'Commercial Work', href: '#services' }
+    ],
+    resources: [
+      { name: 'Portfolio', href: '#portfolio' },
+      { name: 'Case Studies', href: '#case-studies' },
+      { name: 'Blog', href: '#blog' },
+      { name: 'FAQs', href: '#faq' }
+    ]
+  };
 
   const socialLinks = [
     { name: 'Instagram', icon: '📷', href: '#' },
@@ -27,6 +33,7 @@ const Footer = () => {
   ];
 
   return (
+      return (
     <footer className="bg-dark-900 border-t border-gold-400/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
         {/* Main Footer Content */}
@@ -205,6 +212,7 @@ const Footer = () => {
         </motion.div>
       </div>
     </footer>
+  );
   );
 };
 

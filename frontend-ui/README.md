@@ -1,6 +1,6 @@
-# Shambhu Production House
+# Shambhu Group
 
-A premium cinematic production house website built with React, Vite, and Tailwind CSS.
+A premium cinematic creative group website built with React, Vite, and Tailwind CSS.
 
 ## 🎬 Features
 
@@ -142,7 +142,7 @@ For support or questions, please contact [your-email@domain.com]
 
 ---
 
-Built with ❤️ by Shambhu Production House+ Vite
+Built with ❤️ by Shambhu Group+ Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

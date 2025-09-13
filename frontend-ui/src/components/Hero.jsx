@@ -127,10 +127,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="mb-8"
+          className="mb-6 md:mb-8"
         >
-          <span className="text-gold-400 text-lg md:text-xl font-medium tracking-[0.3em] uppercase">
-            Shambhu Production House
+          <span className="text-gold-400 text-sm sm:text-base md:text-lg lg:text-xl font-medium tracking-[0.2em] sm:tracking-[0.3em] uppercase">
+            Shambhu Group
           </span>
         </motion.div>
 
@@ -139,9 +139,9 @@ const Hero = () => {
           variants={typewriterVariants}
           initial="hidden"
           animate="visible"
-          className="mb-12"
+          className="mb-8 md:mb-12"
         >
-          <motion.h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-black leading-[0.9] tracking-tight">
+          <motion.h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-black leading-[0.9] tracking-tight">
             <motion.div className="overflow-hidden">
               <motion.span 
                 className="block text-cream"
@@ -180,7 +180,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-16 max-w-5xl mx-auto leading-relaxed font-light"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-12 md:mb-16 max-w-5xl mx-auto leading-relaxed font-light px-4 sm:px-0"
         >
           We push the boundaries of{' '}
           <motion.span 
@@ -198,11 +198,11 @@ const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.5 }}
-          className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-20"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 justify-center items-center mb-16 md:mb-20 px-4 sm:px-0"
         >
           <motion.button 
             onClick={() => scrollToSection('#portfolio')}
-            className="group relative overflow-hidden bg-gold-400 text-dark-900 px-12 py-6 text-lg font-bold rounded-xl transform transition-all duration-500"
+            className="group relative overflow-hidden bg-gold-400 text-dark-900 px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 text-base sm:text-lg font-bold rounded-xl transform transition-all duration-500 w-full sm:w-auto"
             whileHover={{ 
               scale: 1.05,
               boxShadow: "0 25px 50px rgba(245, 180, 0, 0.4)"
@@ -220,7 +220,7 @@ const Hero = () => {
           
           <motion.button 
             onClick={() => scrollToSection('#contact')}
-            className="group relative overflow-hidden border-2 border-gold-400 text-gold-400 px-12 py-6 text-lg font-bold rounded-xl backdrop-blur-sm"
+            className="group relative overflow-hidden border-2 border-gold-400 text-gold-400 px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 text-base sm:text-lg font-bold rounded-xl backdrop-blur-sm w-full sm:w-auto"
             whileHover={{ 
               scale: 1.05,
               borderColor: "#fff"
